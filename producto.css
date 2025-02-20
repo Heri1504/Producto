@@ -1,0 +1,11 @@
+.message {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    display: none;
+}
+.success { background-color: green; }
+.error { background-color: red; }

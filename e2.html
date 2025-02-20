@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="producto.css">
+    <title>Agregar productos</title>
+</head>
+<body>
+    <div class="message" id="mensaje"></div>
+
+    <div class="container">
+        <h2>Agregar Producto</h2>
+        <label for="codigo">Código:</label>
+        <input type="text" id="codigo">
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre">
+
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad">
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio">
+
+        <label for="categoria">Categoría:</label>
+        <input type="text" id="categoria">
+
+        <button onclick="agregarProducto()">Agregar Producto</button>
+    </div>
+
+    <script>
+        const productos = new Map();
+
+        function mostrarMensaje(texto, tipo) {
+            const mensaje = document.getElementById("mensaje");
+            mensaje.textContent = texto;
+            mensaje.className = "message " + tipo;
+            mensaje.style.display = "block";
+            setTimeout(() => mensaje.style.display = "none", 3000);
+        }
+
+        function agregarProducto() {
+            const codigo = document.getElementById("codigo").value.trim();
+            const nombre = document.getElementById("nombre").value.trim();
+            const cantidad = document.getElementById("cantidad").value.trim();
+            const precio = document.getElementById("precio").value.trim();
+            const categoria = document.getElementById("categoria").value.trim();
+
+            if (!codigo || !nombre || !cantidad || !precio || !categoria) {
+                mostrarMensaje("Todos los campos son obligatorios", "error");
+                return;
+            }
+            if (productos.has(codigo)) {
+                mostrarMensaje("El código del producto ya existe", "error");
+                return;
+            }
+
+            productos.set(codigo, { nombre, cantidad, precio, categoria });
+            mostrarMensaje("Producto agregado correctamente", "success");
+            document.querySelectorAll("input").forEach(input => input.value = "");
+        }
+    </script>
+</body>
+</html>
